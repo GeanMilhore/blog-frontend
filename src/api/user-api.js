@@ -1,4 +1,4 @@
-export const API_URL = "locahost:8080";
+export const API_URL = "localhost:8080";
 
 export function USER_POST(body){
     return {

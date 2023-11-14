@@ -42,4 +42,4 @@ jobs:
         run: docker rm -f blog_frontend
       
       - name: Run docker container
-        run: docker run --interactive --tty --network host --name blog_frontend geanmilhore/blog_frontend
+        run: docker run --interactive --network host --name blog_frontend geanmilhore/blog_frontend

@@ -6,6 +6,3 @@ services:
     stdin_open: true
     tty: true
     network_mode: "host"
-    volumes:
-      - ../blog-frontend:/app
-      - ./app/node_modules

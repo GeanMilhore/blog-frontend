@@ -1,0 +1,43 @@
+name: Deploy Blog Frontend
+
+on:
+  pull_request:
+    types: [closed]
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+    
+      - name: Setup nodejs
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+
+      - name: Build Project
+        run: npm build
+      
+      - name: Login Docker Hub
+        run: docker login -u ${{secrets.DOCKER_USERNAME}} -p ${{secrets.DOCKER_PASSWORD}}
+
+      - name: Build docker image
+        run : docker build -t geanmilhore/blog_frontend .
+
+      - name: Push image docker
+        run: docker push geanmilhore/blog_frontend
+  
+  deploy:
+    needs: build
+    runs-on: self-hosted
+    steps:
+      - name: Pull image from docker hub
+        run: docker pull geanmilhore/blog_frontend:latest
+      
+      - name: Remove last container
+        run: docker rm -f blog_frontend
+      
+      - name: Run docker container
+        run: docker run --interactive --tty --network host --name blog_frontend geanmilhore/blog_frontend

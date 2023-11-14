@@ -1,8 +1,8 @@
-export const API_URL = "localhost:8080";
+import { BACKEND_URL } from "./backend-url";
 
-export function USER_POST(body){
+export function USER_CREATE(body){
     return {
-        url: API_URL + "/user/create",
+        url: BACKEND_URL + "/user/create",
         options: {
             method: "POST",
             headers: {

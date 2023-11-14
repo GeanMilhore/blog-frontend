@@ -11,6 +11,24 @@ export const UserStorage = ({ children }) => {
   const [error, setError] = React.useState(null);
   const navigate = useNavigate();
 
+  React.useEffect(() => {
+    verifyAuthentication()
+  }, [])
+
+  function verifyAuthentication () {
+      let token = window.localStorage.getItem("token");
+      if (token) {
+        let isTokenValid = true;
+        if(isTokenValid){
+          setLogado(true)
+          return isTokenValid;
+        } else {
+          fazerLogout()
+          return false;
+        }
+      }
+  }
+
   const fazerLogout = React.useCallback(
     async function () {
       window.localStorage.removeItem("token");
@@ -29,18 +47,21 @@ export const UserStorage = ({ children }) => {
       setError(null);
       setLoading(true);
       const { url, options } = LOGIN({
-        email: username,
-        senha: password,
+        login: username,
+        password: password,
       });
 
-      const tokenRes = await fetch(url, options);
+      const tokenRes = (await fetch(url, options));
+
       if (!tokenRes.ok) throw new Error("Usuário Ínvalido");
       const json = await tokenRes.json();
       const token = await json.token;
+
       window.localStorage.setItem("token", token);
-      await getUser(token);
-      navigate('/conta/home')
+      setLogado(true)
+      navigate('/home')
     } catch (err) {
+      console.log(err)
       setError(err.message);
       setLogado(false);
     } finally {

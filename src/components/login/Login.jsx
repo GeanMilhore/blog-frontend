@@ -8,7 +8,6 @@ import Input from '../commons/Input/Input';
 
 import style from './Login.module.css';
 
-
 const Login = () => {
 
     const email = UseForm();
@@ -55,7 +54,7 @@ const Login = () => {
                   await navigate("/create-account");
                 }}
               >
-                Clique aqui
+              {" "}Clique aqui
               </span>
             </p>
         </>

@@ -1,12 +1,12 @@
-export const API_URL = "localhost:8080";
+import { BACKEND_URL } from "./backend-url";
 
 export function LOGIN(body){
     return {
-        url: API_URL + "/auth/login",
+        url: BACKEND_URL + "/auth/login",
         options: {
             method: "POST",
             headers: {
-                "Content-Type":"application/json",
+                "Content-Type": "application/json",
             },
             body: JSON.stringify(body)
         }

@@ -12,3 +12,16 @@ export function LOGIN(body){
         }
     }
 }
+
+export function VALIDATE_REGISTRY(body){
+    return {
+        url: BACKEND_URL + "/auth/validateUserRegistry",
+        options: {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(body)
+        }
+    }
+}

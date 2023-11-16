@@ -26,7 +26,7 @@ const Login = () => {
             <div className={style.loginContainer}>
                 <div className={style.loginInputs}>
                     <Input type="text" label="E-mail: " {...email}/>
-                    <Input type="text" label="Password: " {...senha}/>
+                    <Input type="password" label="Password: " {...senha}/>
                 </div>
                 <div className='login-button'>
                     <Button
